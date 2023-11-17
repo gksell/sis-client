@@ -5,8 +5,7 @@ import Center from './Center';
 import useForm from '../hooks/useForm';
 import { ENDPOINTS, createAPIEndpoint } from '../api';
 import store from '../store/store';
-import { setToken } from '../reducers/authReducer';
-
+import { setToken, setUser } from '../reducers/authReducer'; 
 
 const getFreshModel = () => ({
     password: '',
@@ -28,12 +27,16 @@ export default function Login() {
         console.log(values);
         if (validate()) {
             createAPIEndpoint(ENDPOINTS.auth +'/login')
-            .post(values)
-            .then(res=> {store.dispatch(setToken(res.data));
-             console.log("Redux State:", store.getState());
-             navigate('/ana-sayfa');
-            })
-            .catch(err => console.log(err))
+                .post(values)
+                .then(res => {
+                    console.log(res);
+                    store.dispatch(setToken(res.data.token)); 
+                    store.dispatch(setUser(res.data.userId)); 
+                    console.log("Redux State:", store.getState());
+                    console.log("Data:", res.data);
+                    navigate('/ana-sayfa');
+                })
+                .catch(err => console.log(err))
         }
     }
 
@@ -44,6 +47,7 @@ export default function Login() {
         setErrors(temp)
         return Object.values(temp).every(x => x === "")
     }
+
     return (
         <Center>
             <Card sx={{ width: 400 }}>
@@ -68,7 +72,7 @@ export default function Login() {
                             <TextField
                                 label="Password"
                                 name="password"
-                                type="password" 
+                                type="password"
                                 value={values.password}
                                 onChange={handleInputChange}
                                 variant="outlined"

@@ -27,6 +27,11 @@ const Menu = () => {
               Kursa Not Ekle
             </Button>
           </li>
+          <li style={{ margin: '0.5rem 0' }}>
+            <Button variant="contained" component={Link} to="/kurslarim-ogretmen">
+              Kurslarım - Öğretmen
+            </Button>
+          </li>
         </ul>
       </nav>
     </Box>
