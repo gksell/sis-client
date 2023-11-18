@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Card, CardContent, TextField, Typography, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
+import { Box, Button, Card, CardContent, Typography, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import { createAPIEndpoint, ENDPOINTS } from '../api';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const AddStudentToCourse = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const authState = useSelector(state => state.auth);
     const [values, setValues] = useState({
         studentId: '',

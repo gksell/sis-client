@@ -6,6 +6,7 @@ import { setToken } from '../reducers/authReducer';
 import { useNavigate } from 'react-router-dom';
 
 const UserCreate = () => {
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const authState = useSelector(state => state.auth); 
@@ -30,7 +31,13 @@ const UserCreate = () => {
     };
 
     const handleSubmit = (e) => {
+        setError(null);
         e.preventDefault();
+
+        if (!values.email || !values.password || !values.roleName || !values.firstName || !values.lastName || !values.birthDate) {
+            setError('Lütfen tüm alanları doldurun.');
+            return;
+          }
 
         const authToken = authState.token;
         console.log(`Bearer ${authToken}`);
@@ -40,7 +47,7 @@ const UserCreate = () => {
             }
           };
 
-        createAPIEndpoint(ENDPOINTS.auth + '/register',config)
+        createAPIEndpoint(ENDPOINTS.auth + '/register', config)
             .post(values)
             .then((response) => {
                 console.log('Post işlemi başarılı:', response.data);
@@ -48,6 +55,10 @@ const UserCreate = () => {
             })
             .catch((error) => {
                 console.error('Post işlemi sırasında bir hata oluştu:', error);
+                setError(error.response.data.message);
+                setTimeout(() => {
+                    setError(null);
+                  }, 3000);
             });
     };
 
@@ -58,6 +69,7 @@ const UserCreate = () => {
                     <Typography variant="h5" gutterBottom>
                         Kullanıcı Ekle
                     </Typography>
+                    {error && <div style={{ color: 'red', marginBottom: '1rem' }}>{error}</div>}
                     <form onSubmit={handleSubmit}>
                         <TextField
                             label="Email"

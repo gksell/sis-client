@@ -25,3 +25,29 @@ export const createAPIEndpoint = (endpoint, header) => {
         fetchWithParams: params => axios.get(url, { ...header, params })
     }
 }
+
+
+export const setRouteWithRole = (role) => {
+    let roleList = [];
+    switch (role) {
+        case "Admin":
+            roleList.push("/ana-sayfa");
+            roleList.push("/kullanici-ekle");
+            roleList.push("/kurs-ekle");
+            roleList.push("/kursa-ogrenci-ekle");
+            break;
+        case "Öğretmen":
+            roleList.push("/ana-sayfa");
+            roleList.push("/kurslarim-ogretmen");
+            
+            break;
+        case "Öğrenci":
+            roleList.push("/ana-sayfa");
+            break;
+
+        default:
+            break;
+    }
+    localStorage.setItem("RoleList", roleList);
+
+}

@@ -4,8 +4,7 @@ import Menu from './Menu';
 const Home = () => {
   return (
     <div>
-      <h1>Ana Sayfa</h1>
-      <Menu />
+      <Menu/>
     </div>
   );
 };
