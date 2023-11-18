@@ -6,6 +6,7 @@ import UserCreate from './components/UserCreate';
 import CourseCreate from './components/CourseCreate';
 import AddStudentToCourse from './components/AddStudentToCourse';
 import TeacherCourses from './components/TeacherCourses';
+import StudentCourses from './components/StudentCourses';
 
 
 const checkAuth = () => {
@@ -21,8 +22,6 @@ const PrivateRoute = ({ element: Element, path, ...rest }) => {
   if (!isAuthenticated) {
     return <Navigate to="/" />;
   }
-  console.log("path", path);
-  //
   if (!roleList.includes(path)) {
     return <Navigate to="/Error" />;
   }
@@ -59,6 +58,10 @@ function App() {
           <Route
             path="/kurslarim-ogretmen"
             element={<PrivateRoute element={TeacherCourses} path="/kurslarim-ogretmen" />}
+          />
+          <Route
+            path="/kurslarim-ogrenci"
+            element={<PrivateRoute element={StudentCourses} path="/kurslarim-ogrenci" />}
           />
         </Routes>
       </div>

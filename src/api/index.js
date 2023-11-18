@@ -17,7 +17,7 @@ export const createAPIEndpoint = (endpoint, header) => {
     let url = BASE_URL + 'api/' + endpoint + '/';
 
     return {
-        fetch: () => axios.get(url),
+        fetch: () => axios.get(url,header),
         fetchById: id => axios.get(url + id),
         post: newRecord => axios.post(url, newRecord, header),
         put: (id, updatedRecord) => axios.put(url + id, updatedRecord),
@@ -36,13 +36,14 @@ export const setRouteWithRole = (role) => {
             roleList.push("/kurs-ekle");
             roleList.push("/kursa-ogrenci-ekle");
             break;
-        case "Öğretmen":
+        case "Teacher":
             roleList.push("/ana-sayfa");
             roleList.push("/kurslarim-ogretmen");
             
             break;
-        case "Öğrenci":
+        case "Student":
             roleList.push("/ana-sayfa");
+            roleList.push("/kurslarim-ogrenci");
             break;
 
         default:

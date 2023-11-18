@@ -102,8 +102,8 @@ const UserCreate = () => {
                                 onChange={handleChange}
                             >
                                 <MenuItem value="Admin">Admin</MenuItem>
-                                <MenuItem value="Öğrenci">Öğrenci</MenuItem>
-                                <MenuItem value="Öğretmen">Öğretmen</MenuItem>
+                                <MenuItem value="Student">Öğrenci</MenuItem>
+                                <MenuItem value="Teacher">Öğretmen</MenuItem>
                             </Select>
                         </FormControl>
                         <TextField
