@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Button, Card, CardContent, TextField, Typography, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import { ENDPOINTS, createAPIEndpoint } from '../api';
-import { useDispatch, useSelector } from 'react-redux';
-import { setToken } from '../reducers/authReducer';
+import {  useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Menu from './Menu';
 
 const CourseCreate = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const authState = useSelector(state => state.auth);
     const [values, setValues] = useState({
         courseName: '',

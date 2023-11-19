@@ -3,16 +3,14 @@ import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/mate
 import { useNavigate } from 'react-router-dom';
 import Center from './Center';
 import useForm from '../hooks/useForm';
-import { ENDPOINTS, createAPIEndpoint,setRouteWithRole } from '../api';
+import { ENDPOINTS, createAPIEndpoint, setRouteWithRole } from '../api';
 import store from '../store/store';
-import { setToken, setUser } from '../reducers/authReducer'; 
+import { setToken, setUser } from '../reducers/authReducer';
 
 const getFreshModel = () => ({
     password: '',
     email: '',
 })
-
-
 
 export default function Login() {
 
@@ -30,22 +28,22 @@ export default function Login() {
     const login = (e) => {
         e.preventDefault();
         if (validate()) {
-            createAPIEndpoint(ENDPOINTS.auth +'/login')
+            createAPIEndpoint(ENDPOINTS.auth + '/login')
                 .post(values)
                 .then(res => {
-                    store.dispatch(setToken(res.data.token)); 
-                    localStorage.setItem("Role",res.data.roleName); 
-                    localStorage.setItem("Token",res.data.token); 
+                    store.dispatch(setToken(res.data.token));
+                    localStorage.setItem("Role", res.data.roleName);
+                    localStorage.setItem("Token", res.data.token);
                     setRouteWithRole(res.data.roleName);
-                    store.dispatch(setUser(res.data.userId)); 
+                    store.dispatch(setUser(res.data.userId));
                     navigate('/ana-sayfa');
                 })
                 .catch(err => {
-          setError(err.response.data.message); 
-          setTimeout(() => {
-            setError(null);
-          }, 3000);
-        })
+                    setError(err.response.data.message);
+                    setTimeout(() => {
+                        setError(null);
+                    }, 3000);
+                })
         }
     }
 

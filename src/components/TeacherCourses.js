@@ -97,8 +97,10 @@ const TeacherCourses = () => {
                 });
             })
             .catch((error) => {
-                console.log(error);
-                setErrorDialog(error.response.data.errors, errorDialog);
+                setErrorDialog(error.response.data.message);
+                setTimeout(() => {
+                    setErrorDialog(null);
+                }, 3000);
             });
     };
 

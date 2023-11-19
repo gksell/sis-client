@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { Box, Button, Card, CardContent, TextField, Typography, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import { ENDPOINTS, createAPIEndpoint } from '../api';
-import { useDispatch, useSelector } from 'react-redux';
-import { setToken } from '../reducers/authReducer';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Menu from './Menu';
 
 const UserCreate = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const authState = useSelector(state => state.auth);
     const [values, setValues] = useState({
         email: '',
@@ -84,7 +82,7 @@ const UserCreate = () => {
                                 onChange={handleChange}
                             />
                             <TextField
-                                label="Password"
+                                label="Şifre"
                                 name="password"
                                 fullWidth
                                 margin="normal"
@@ -94,7 +92,7 @@ const UserCreate = () => {
                                 onChange={handleChange}
                             />
                             <FormControl fullWidth margin="normal" variant="outlined">
-                                <InputLabel id="role-label">Role Name</InputLabel>
+                                <InputLabel id="role-label">Rol</InputLabel>
                                 <Select
                                     labelId="role-label"
                                     id="role"
@@ -110,7 +108,7 @@ const UserCreate = () => {
                                 </Select>
                             </FormControl>
                             <TextField
-                                label="First Name"
+                                label="Ad"
                                 name="firstName"
                                 fullWidth
                                 margin="normal"
@@ -119,7 +117,7 @@ const UserCreate = () => {
                                 onChange={handleChange}
                             />
                             <TextField
-                                label="Last Name"
+                                label="Soyadı"
                                 name="lastName"
                                 fullWidth
                                 margin="normal"
@@ -128,7 +126,7 @@ const UserCreate = () => {
                                 onChange={handleChange}
                             />
                             <TextField
-                                label="Birth Date"
+                                label="Doğum Tarihi"
                                 name="birthDate"
                                 fullWidth
                                 margin="normal"
@@ -138,7 +136,7 @@ const UserCreate = () => {
                                 onChange={handleChange}
                             />
                             <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
-                                Ekle
+                               Ekle
                             </Button>
                         </form>
                     </CardContent>

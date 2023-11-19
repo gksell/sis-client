@@ -26,7 +26,6 @@ export const createAPIEndpoint = (endpoint, header) => {
     }
 }
 
-
 export const setRouteWithRole = (role) => {
     let roleList = [];
     switch (role) {
