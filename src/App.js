@@ -35,10 +35,12 @@ function App() {
   return (
     <Router>
 
-      {isAuthenticated && <div> <Home /></div>}
       <div>
         <Routes>
-          <Route path="/" element={<Login />} />
+        <Route
+          path="/"
+          element={isAuthenticated ? <Navigate to="/ana-sayfa" replace /> : <Login />}
+        />
           <Route
             path="/ana-sayfa"
             element={<PrivateRoute element={Home} path="/ana-sayfa" />}

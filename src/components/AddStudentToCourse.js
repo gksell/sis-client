@@ -3,6 +3,7 @@ import { Box, Button, Card, CardContent, Typography, Select, MenuItem, InputLabe
 import { createAPIEndpoint, ENDPOINTS } from '../api';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Menu from './Menu';
 
 const AddStudentToCourse = () => {
     const navigate = useNavigate();
@@ -63,7 +64,7 @@ const AddStudentToCourse = () => {
             }
         };
 
-        createAPIEndpoint(ENDPOINTS.studentcourses+setAddStudentToCourseEndpoint, config)
+        createAPIEndpoint(ENDPOINTS.studentcourses + setAddStudentToCourseEndpoint, config)
             .post(values)
             .then((response) => {
                 console.log('Öğrenci kursa eklendi:', response.data);
@@ -75,13 +76,15 @@ const AddStudentToCourse = () => {
     };
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-            <Card>
-                <CardContent>
-                    <Typography variant="h5" gutterBottom>
-                        Kursa Öğrenci Ekle
-                    </Typography>
-                    <FormControl fullWidth margin="normal" variant="outlined">
+        <div>
+            <Menu />
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <Card>
+                    <CardContent>
+                        <Typography variant="h5" gutterBottom>
+                            Kursa Öğrenci Ekle
+                        </Typography>
+                        <FormControl fullWidth margin="normal" variant="outlined">
                             <InputLabel id="course-label">Kurs</InputLabel>
                             <Select
                                 labelId="course-label"
@@ -98,32 +101,33 @@ const AddStudentToCourse = () => {
                                 ))}
                             </Select>
                         </FormControl>
-                    <form onSubmit={handleSubmit}>
-                        <FormControl fullWidth margin="normal" variant="outlined">
-                            <InputLabel id="student-label">Öğrenci</InputLabel>
-                            <Select
-                                labelId="student-label"
-                                id="studentId"
-                                label="Öğrenci"
-                                name="studentId"
-                                value={values.studentId}
-                                onChange={handleInputChange}
-                            >
-                                {students.map((student) => (
-                                    <MenuItem key={student.id} value={student.id}>
-                                        {student.firstName} {student.lastName}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                        
-                        <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
-                            Ekle
-                        </Button>
-                    </form>
-                </CardContent>
-            </Card>
-        </Box>
+                        <form onSubmit={handleSubmit}>
+                            <FormControl fullWidth margin="normal" variant="outlined">
+                                <InputLabel id="student-label">Öğrenci</InputLabel>
+                                <Select
+                                    labelId="student-label"
+                                    id="studentId"
+                                    label="Öğrenci"
+                                    name="studentId"
+                                    value={values.studentId}
+                                    onChange={handleInputChange}
+                                >
+                                    {students.map((student) => (
+                                        <MenuItem key={student.id} value={student.id}>
+                                            {student.firstName} {student.lastName}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+
+                            <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
+                                Ekle
+                            </Button>
+                        </form>
+                    </CardContent>
+                </Card>
+            </Box>
+        </div>
     );
 };
 

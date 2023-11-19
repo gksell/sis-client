@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Button, Card, CardContent, TextField, Typography, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import { ENDPOINTS, createAPIEndpoint } from '../api';
-import { useDispatch, useSelector } from 'react-redux'; 
+import { useDispatch, useSelector } from 'react-redux';
 import { setToken } from '../reducers/authReducer';
 import { useNavigate } from 'react-router-dom';
+import Menu from './Menu';
 
 const CourseCreate = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const authState = useSelector(state => state.auth); 
+    const authState = useSelector(state => state.auth);
     const [values, setValues] = useState({
         courseName: '',
         teacherId: ''
@@ -67,46 +68,49 @@ const CourseCreate = () => {
     };
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-            <Card>
-                <CardContent>
-                    <Typography variant="h5" gutterBottom>
-                        Kurs Ekle
-                    </Typography>
-                    <form onSubmit={handleSubmit}>
-                        <TextField
-                            label="Kurs Adı"
-                            name="courseName"
-                            fullWidth
-                            margin="normal"
-                            variant="outlined"
-                            value={values.courseName}
-                            onChange={handleChange}
-                        />
-                        <FormControl fullWidth margin="normal" variant="outlined">
-                            <InputLabel id="teacher-label">Eğitmen</InputLabel>
-                            <Select
-                                labelId="teacher-label"
-                                id="teacherId" // Değişiklik: id -> teacherId olarak güncellendi
-                                label="Eğitmen"
-                                name="teacherId" // Değişiklik: teacher -> teacherId olarak güncellendi
-                                value={values.teacherId}
+        <div>
+            <Menu />
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <Card>
+                    <CardContent>
+                        <Typography variant="h5" gutterBottom>
+                            Kurs Ekle
+                        </Typography>
+                        <form onSubmit={handleSubmit}>
+                            <TextField
+                                label="Kurs Adı"
+                                name="courseName"
+                                fullWidth
+                                margin="normal"
+                                variant="outlined"
+                                value={values.courseName}
                                 onChange={handleChange}
-                            >
-                                {teachers.map((teacher) => (
-                                    <MenuItem key={teacher.id} value={teacher.id}>
-                                        {teacher.firstName} {teacher.lastName}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                        <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
-                            Ekle
-                        </Button>
-                    </form>
-                </CardContent>
-            </Card>
-        </Box>
+                            />
+                            <FormControl fullWidth margin="normal" variant="outlined">
+                                <InputLabel id="teacher-label">Eğitmen</InputLabel>
+                                <Select
+                                    labelId="teacher-label"
+                                    id="teacherId" // Değişiklik: id -> teacherId olarak güncellendi
+                                    label="Eğitmen"
+                                    name="teacherId" // Değişiklik: teacher -> teacherId olarak güncellendi
+                                    value={values.teacherId}
+                                    onChange={handleChange}
+                                >
+                                    {teachers.map((teacher) => (
+                                        <MenuItem key={teacher.id} value={teacher.id}>
+                                            {teacher.firstName} {teacher.lastName}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                            <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
+                                Ekle
+                            </Button>
+                        </form>
+                    </CardContent>
+                </Card>
+            </Box>
+        </div>
     );
 };
 
