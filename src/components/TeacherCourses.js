@@ -9,6 +9,7 @@ const TeacherCourses = () => {
     const [teacherCourses, setTeacherCourses] = useState([]);
     const [error, setError] = useState('');
     const [errorDialog, setErrorDialog] = useState();
+    const [successDialog, setSuccessDialog] = useState();
     const [teacherId, setTeacherId] = useState(null);
     const [selectedCourseId, setSelectedCourseId] = useState(null);
     const [openDialog, setOpenDialog] = useState(false);
@@ -86,7 +87,10 @@ const TeacherCourses = () => {
         createAPIEndpoint(endpoint, config)
             .post(requestModel)
             .then((response) => {
-
+                setSuccessDialog("Not başarıyla eklendi.");
+                setTimeout(() => {
+                setSuccessDialog(null);
+                }, 2000);
                 console.log(response);
                 setStudents(prevStudents => {
                     const updatedStudents = [...prevStudents];
@@ -135,6 +139,7 @@ const TeacherCourses = () => {
                     <DialogTitle style={{ textAlign: 'center', fontSize: '24px' }}>
                         <strong>ÖĞRENCİLER</strong>
                         {errorDialog && <Typography color="error">{errorDialog}</Typography>}
+                        {successDialog &&<Typography style={{ color: 'green' }}>{successDialog}</Typography>}
                     </DialogTitle>
                     <DialogContent>
                         <List>

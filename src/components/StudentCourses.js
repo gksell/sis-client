@@ -38,8 +38,6 @@ const StudentCourses = () => {
         if (studentId) {
 
             const notesEndpoint = `${ENDPOINTS.notes}/get-notes-by-student/${studentId}`;
-            console.log(config);
-            console.log(notesEndpoint);
 
             createAPIEndpoint(notesEndpoint, config)
                 .fetch()
